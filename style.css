@@ -1,0 +1,13 @@
+#root {
+  display: flex;
+}
+
+.first_div {
+  width: 40%;
+  background-color: rgb(185, 146, 221);
+}
+
+.second_div {
+  width: 60%;
+  background-color: rgb(116, 154, 236);
+}
