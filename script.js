@@ -23,30 +23,47 @@ function renderList() {
 
     list.insertAdjacentHTML("afterbegin", (
         allBooks.map(item => {
-            return `<li><p>${item.title}</p><button class="edit">Edit</button><button class="delete">Delete</button></li>`
+            return `<li id=${item.id}><p>${item.title}</p><button class="edit">Edit</button><button class="delete">Delete</button></li>`
         }).join("")
     ))
 
     const discription = document.querySelectorAll('p');
     const btnEdit = document.querySelectorAll('.edit');
     const btnDelete = document.querySelectorAll('.delete');
-
+    
     discription.forEach(item => item.addEventListener('click', renderBook));
     btnEdit.forEach(item => item.addEventListener('click', editBook));
     btnDelete.forEach(item => item.addEventListener('click', deleteBook));
-
+    
 }
 
-function renderBook() {
-    console.log("renderBook");
+function renderBook(e) {
+    
+    const renderItem = document.querySelector('.second_div')
+    const textDesc = e.currentTarget.textContent;
+    const allBooks = JSON.parse(localStorage.getItem('books'));
+
+    const currentBook =  allBooks.find(elem => elem.title === textDesc)
+    renderItem.innerHTML = 
+    
+            `<h2>${currentBook.title}</h2>
+            <h3>${currentBook.author}</h3>
+            <img class="book_image" src=${currentBook.img} />
+            <p>${currentBook.plot}</p>
+        `
 }
 function editBook() {
     console.log("editBook");
 }
-function deleteBook() {
-    console.log("deleteBook");
+function deleteBook(e) {
+    const allBooks = JSON.parse(localStorage.getItem('books'));
+    const bookId = e.currentTarget.parentNode.id;
+
+    allBooks.filter(item => item.id !== bookId);
+
+
+
 }
 
 renderList();
-renderBook();
 editBook();
