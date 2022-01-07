@@ -53,15 +53,16 @@ function renderBook(e) {
         `
 }
 function editBook() {
-    console.log("editBook");
+    
 }
 function deleteBook(e) {
     const allBooks = JSON.parse(localStorage.getItem('books'));
     const bookId = e.currentTarget.parentNode.id;
 
-    allBooks.filter(item => item.id !== bookId);
-
-
+    const newList = allBooks.filter(item => item.id !== bookId);
+    localStorage.setItem("books", JSON.stringify(newList));
+    list.innerHTML = '';
+    renderList();
 
 }
 
