@@ -8,6 +8,7 @@ divTwo.classList.add("second_div");
 const title = document.createElement("h1");
 const list = document.createElement("ul");
 const button = document.createElement("button");
+button.classList.add("add_button");
 
 root.append(divOne, divTwo);
 divOne.append(title, list, button);
@@ -52,9 +53,11 @@ function renderBook(e) {
             <p>${currentBook.plot}</p>
         `
 }
+
 function editBook() {
-    
+
 }
+
 function deleteBook(e) {
     const allBooks = JSON.parse(localStorage.getItem('books'));
     const bookId = e.currentTarget.parentNode.id;
@@ -64,7 +67,54 @@ function deleteBook(e) {
     list.innerHTML = '';
     renderList();
 
+    const header = e.currentTarget.parentNode.firstElementChild;
+
+    if (header.textContent === divTwo.firstElementChild.textContent) {
+
+        divTwo.innerHTML = '';
+    }
+
 }
+document.querySelector(".add_button");
+button.addEventListener('click', addBook)
+
+function addBook() {
+    const newBook = {
+        id: Data.now(),
+        title: " ",
+        author: " ",
+        img: " ",
+        url: " ",
+        plot: " ",
+
+    }
+
+    const newForm = `<form class="form">
+    <label>
+        <input type="text" placeholder="Название" name="title">
+    </label>
+    <label>
+        <input type="text" placeholder="Автор" name="author">
+    </label>
+    <label>
+        <input type="text" placeholder="Описание" name="plot">
+    </label>
+    <label>
+        <input type="text" placeholder="ССылка" name="url">
+    </label>
+
+    <button type="button"></button>    
+
+    </form>`
+
+    const inputAll = document.querySelectorAll("input");
+    inputAll.forEach(el => el.addEventListener('change', onInputValue))
+
+    function onInputValue() {
+        
+    }
+}
+
 
 renderList();
 editBook();
